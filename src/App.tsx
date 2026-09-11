@@ -159,27 +159,66 @@ function App() {
 
   if (showIntro) {
     return (
-      <div className="w-full h-full bg-black flex items-center justify-center flex-col gap-6 cursor-pointer"
+      <div 
+        style={{ 
+          width: '100vw', 
+          height: '100vh', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          flexDirection: 'column',
+          gap: '20px',
+          cursor: 'pointer',
+          position: 'relative',
+          background: '#000000',
+          overflow: 'hidden'
+        }}
         onClick={() => setShowIntro(false)}
       >
-        <div className="text-center">
-          <div className="text-gray-600 text-sm mb-4" style={{ fontFamily: "'VT323', monospace" }}>
+        {/* Bright red warning box to ensure visibility */}
+        <div style={{
+          position: 'absolute',
+          top: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#ff0000',
+          color: '#ffffff',
+          padding: '10px 30px',
+          fontSize: '20px',
+          fontFamily: "'VT323', 'Courier New', monospace",
+          fontWeight: 'bold',
+          border: '3px solid #ff0000',
+          zIndex: 100
+        }}>
+          ⚠ WARNING ⚠
+        </div>
+
+        <div style={{ textAlign: 'center', padding: '20px', zIndex: 10 }}>
+          <div style={{ color: '#ff0000', fontSize: '32px', marginBottom: '25px', fontFamily: "'VT323', 'Courier New', monospace", fontWeight: 'bold' }}>
             ⚠ WARNING ⚠
           </div>
-          <div className="text-gray-400 text-lg mb-6" style={{ fontFamily: "'VT323', monospace" }}>
+          <div style={{ color: '#e0e0e0', fontSize: '26px', marginBottom: '25px', fontFamily: "'VT323', 'Courier New', monospace", lineHeight: '1.4' }}>
             This experience contains flashing images,<br/>
             distorted audio, and unsettling content.
           </div>
-          <div className="text-gray-500 text-sm mb-8" style={{ fontFamily: "'VT323', monospace" }}>
+          <div style={{ color: '#a0a0a0', fontSize: '22px', marginBottom: '35px', fontFamily: "'VT323', 'Courier New', monospace" }}>
             Best experienced with headphones in a dark room.
           </div>
-          <div className="text-gray-300 animate-pulse" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: '12px' }}>
-            [ CLICK TO BEGIN ]
+          <div style={{ 
+            color: '#ffffff', 
+            fontSize: '28px', 
+            fontFamily: "'VT323', 'Courier New', monospace", 
+            fontWeight: 'bold',
+            border: '2px solid #ffffff',
+            padding: '15px 30px',
+            display: 'inline-block'
+          }}>
+            ▶ CLICK ANYWHERE TO BEGIN ◀
           </div>
         </div>
-        <div className="absolute bottom-8 text-gray-700 text-xs text-center" style={{ fontFamily: "'VT323', monospace" }}>
+        <div style={{ position: 'absolute', bottom: '40px', color: '#808080', textAlign: 'center', fontFamily: "'VT323', 'Courier New', monospace", fontSize: '18px', zIndex: 10 }}>
           <div>EVIDENCE FILE: recovered_system_image_1997-10-31.img</div>
-          <div className="mt-1">SOURCE: Unknown — Case #4471 — STATUS: UNRESOLVED</div>
+          <div style={{ marginTop: '8px' }}>SOURCE: Unknown — Case #4471 — STATUS: UNRESOLVED</div>
         </div>
       </div>
     );
@@ -188,7 +227,7 @@ function App() {
   if (!booted) {
     return (
       <div className="w-full h-full bg-black flex items-center justify-center">
-        <div className="text-green-500 font-mono text-sm animate-pulse" style={{ fontFamily: "'VT323', monospace" }}>
+        <div className="text-green-400 font-mono text-xl animate-pulse" style={{ fontFamily: "'VT323', monospace", fontSize: '20px' }}>
           BIOS v2.14 ... Checking memory ... OK
         </div>
       </div>

@@ -38,17 +38,18 @@ export default function BootScreen() {
 
   return (
     <div className="w-full h-full bg-black flex flex-col justify-start p-8">
-      <div className="font-mono text-sm">
+      <div className="font-mono text-lg">
         {lines.map((line, i) => (
           <div
             key={i}
             className={`${
               line.includes('ERROR') || line.includes('WARNING')
                 ? 'text-red-500'
-                : 'text-gray-300'
+                : 'text-green-400'
             } ${i === lines.length - 1 ? 'animate-pulse' : ''}`}
             style={{
-              fontFamily: "'VT323', monospace",
+              fontFamily: "'VT323', 'Courier New', monospace",
+              fontSize: '18px',
             }}
           >
             {line || '\u00A0'}
@@ -58,9 +59,9 @@ export default function BootScreen() {
 
       {/* Progress bar */}
       <div className="mt-8">
-        <div className="w-64 h-4 win95-border-inset bg-gray-900">
+        <div className="w-80 h-6 border-2 border-gray-600 bg-gray-900">
           <div
-            className="h-full bg-blue-600 transition-all duration-200"
+            className="h-full bg-blue-500 transition-all duration-200"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -70,12 +71,12 @@ export default function BootScreen() {
       <div className="mt-auto flex items-end justify-center pb-8">
         <div className="text-center">
           <div
-            className="text-4xl font-bold text-white mb-2"
-            style={{ fontFamily: "'Press Start 2P', cursive", fontSize: '16px' }}
+            className="text-3xl font-bold text-white mb-2"
+            style={{ fontFamily: "'VT323', 'Courier New', monospace", fontSize: '32px' }}
           >
             MyOS 95
           </div>
-          <div className="text-gray-500 text-sm" style={{ fontFamily: "'VT323', monospace" }}>
+          <div className="text-gray-400" style={{ fontFamily: "'VT323', 'Courier New', monospace", fontSize: '16px' }}>
             Loading your personal computer experience...
           </div>
         </div>
