@@ -1,1 +1,277 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --crt-curve: 2px;
+  --scanline-opacity: 0.08;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'VT323', monospace;
+  cursor: default;
+  user-select: none;
+}
+
+/* CRT Screen Effect */
+.crt-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.crt-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, var(--scanline-opacity)),
+    rgba(0, 0, 0, var(--scanline-opacity)) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanline-scroll 8s linear infinite;
+}
+
+.crt-screen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+@keyframes scanline-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+/* VHS Tracking Effect */
+.vhs-tracking {
+  animation: vhs-tracking 0.1s steps(2) infinite;
+}
+
+@keyframes vhs-tracking {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-1px); }
+  100% { transform: translateX(1px); }
+}
+
+/* Glitch Effect */
+.glitch-text {
+  animation: glitch-text 0.3s infinite;
+}
+
+@keyframes glitch-text {
+  0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+  25% { text-shadow: -2px 0 red, 2px 0 cyan; }
+  50% { text-shadow: 2px 2px red, -2px -2px cyan; }
+  75% { text-shadow: -2px 2px red, 2px -2px cyan; }
+  100% { text-shadow: 2px 0 red, -2px 0 cyan; }
+}
+
+/* Screen Tear */
+.screen-tear {
+  animation: screen-tear 0.15s steps(3) infinite;
+}
+
+@keyframes screen-tear {
+  0% { clip-path: inset(0 0 0 0); }
+  33% { clip-path: inset(2px 0 0 0); }
+  66% { clip-path: inset(0 0 3px 0); }
+  100% { clip-path: inset(1px 0 0 0); }
+}
+
+/* Static noise overlay */
+.static-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.static-noise.active {
+  animation: static-flicker 0.1s steps(5) infinite;
+}
+
+@keyframes static-flicker {
+  0% { opacity: 0.05; }
+  20% { opacity: 0.15; }
+  40% { opacity: 0.02; }
+  60% { opacity: 0.1; }
+  80% { opacity: 0.03; }
+  100% { opacity: 0.08; }
+}
+
+/* Color distortion */
+.color-distort {
+  animation: color-distort 2s infinite;
+}
+
+@keyframes color-distort {
+  0% { filter: hue-rotate(0deg); }
+  25% { filter: hue-rotate(5deg) saturate(1.2); }
+  50% { filter: hue-rotate(-3deg) saturate(0.8); }
+  75% { filter: hue-rotate(8deg) brightness(1.1); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+/* Flicker */
+.flicker {
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  30% { opacity: 0.95; }
+  60% { opacity: 0.98; }
+  80% { opacity: 0.93; }
+  100% { opacity: 1; }
+}
+
+/* Heavy glitch */
+.heavy-glitch {
+  animation: heavy-glitch 0.5s steps(4) infinite;
+}
+
+@keyframes heavy-glitch {
+  0% { transform: translate(0, 0) skewX(0deg); filter: hue-rotate(0deg); }
+  25% { transform: translate(-3px, 1px) skewX(-2deg); filter: hue-rotate(90deg); }
+  50% { transform: translate(2px, -1px) skewX(1deg); filter: hue-rotate(180deg); }
+  75% { transform: translate(-1px, 2px) skewX(3deg); filter: hue-rotate(270deg); }
+  100% { transform: translate(0, 0) skewX(0deg); filter: hue-rotate(360deg); }
+}
+
+/* Blink cursor */
+.blink-cursor::after {
+  content: '█';
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Windows 95 style */
+.win95-border {
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+}
+
+.win95-border-inset {
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.win95-button {
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  background: #c0c0c0;
+  padding: 1px 6px;
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.win95-button:active {
+  border-color: #808080 #ffffff #ffffff #808080;
+}
+
+/* Horror-specific animations */
+@keyframes distort-appear {
+  0% { opacity: 0; transform: scaleY(0.01); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes face-appear {
+  0% { opacity: 0; transform: scale(0.5); filter: blur(10px); }
+  30% { opacity: 0.8; transform: scale(1.1); filter: blur(2px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0px); }
+}
+
+@keyframes text-corrupt {
+  0% { letter-spacing: 0; }
+  20% { letter-spacing: 3px; }
+  40% { letter-spacing: -1px; }
+  60% { letter-spacing: 5px; }
+  80% { letter-spacing: -2px; }
+  100% { letter-spacing: 0; }
+}
+
+.corrupt-text {
+  animation: text-corrupt 0.5s steps(3) infinite;
+}
+
+/* Custom cursor for horror moments */
+.horror-cursor {
+  cursor: none;
+}
+
+/* Red flash */
+@keyframes red-flash {
+  0% { background: transparent; }
+  50% { background: rgba(255, 0, 0, 0.1); }
+  100% { background: transparent; }
+}
+
+.red-flash {
+  animation: red-flash 0.3s ease-out;
+}
+
+/* Inverted screen */
+.inverted {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Shake */
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-5px, -3px); }
+  20% { transform: translate(5px, 3px); }
+  30% { transform: translate(-3px, 5px); }
+  40% { transform: translate(3px, -5px); }
+  50% { transform: translate(-5px, 3px); }
+  60% { transform: translate(5px, -3px); }
+  70% { transform: translate(-3px, -5px); }
+  80% { transform: translate(3px, 5px); }
+  90% { transform: translate(-5px, -3px); }
+  100% { transform: translate(0, 0); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
